@@ -7,4 +7,5 @@ class Blacklist < Crecto::Model
   end
 
   validate_required [:chat_id, :word]
+  validate_length :word, min: 3
 end
