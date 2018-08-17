@@ -1,5 +1,7 @@
+# DB
 require "sqlite3"
 require "crecto"
+
 require "telegram_bot"
 require "totem"
 require "./src/main"

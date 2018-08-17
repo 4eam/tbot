@@ -1,11 +1,12 @@
 require "./language"
+require "./repo/config"
 
 class TBot < TelegramBot::Bot
   include TelegramBot::CmdHandler
   include BotLang
 
   def initialize(key)
-    super("TBot", key )
+    super("TBot", key)
 
     cmd "help" do |msg|
       reply msg, help_msg
