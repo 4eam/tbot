@@ -1,0 +1,19 @@
+name: CrystalSilenceKeeper
+version: 0.0.1
+
+authors:
+   - Grigoriy Betsan <griggors@gmail.com>
+
+description: |
+  DevSilenceKeeper but written in powerful Crystal
+
+dependencies:
+  telegram_bot:
+    github: hangyas/telegram_bot
+  crecto:
+    github: fridgerator/crecto
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3  
+
+
+license: GNU
