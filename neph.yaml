@@ -1,0 +1,35 @@
+main:
+  command: |
+    rm -f release.zip
+    zip -r release.zip tbot/
+  dir:
+    dist
+  depends_on:
+    - move_files  
+
+make_dirs:
+  command: |
+    rm -rf tbot
+    mkdir tbot
+    mkdir tbot/db
+  dir: 
+    dist
+
+build:
+  command: |
+    crystal build --release --static tbot.cr
+
+create_db:
+  command: |
+    rm db/database.db
+    bin/micrate up
+
+move_files:
+  command: |
+    mv tbot dist/tbot/
+    cp config.yaml.example dist/tbot/
+    cp db/database.db dist/tbot/db/
+  depends_on:
+    - make_dirs
+    - build
+    - create_db  
