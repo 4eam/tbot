@@ -1,9 +1,10 @@
 class Blacklist < Crecto::Model
 
-  schema "blacklist" do
-    field :group_id, Int32 # or use `PkeyValue` alias: `field :age, PkeyValue`
+  schema "blacklists", primary_key: true do
+    field :id, Int32, primary_key: true
+    field :chat_id, String
     field :word, String
   end
 
-  validate_required [:group_id, :word]
+  validate_required [:chat_id, :word]
 end

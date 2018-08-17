@@ -1,9 +1,11 @@
 -- +micrate Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE blacklists(
-  id INT PRIMARY KEY, 
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
   word VARCHAR NOT NULL,
-  group_id INT NOT NULL
+  chat_id VARCHAR NOT NULL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
 );
 
 

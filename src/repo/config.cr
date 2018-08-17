@@ -1,9 +1,9 @@
-module SqliteRepo
+module Repo
   extend Crecto::Repo
 
   config do |conf|
     conf.adapter = Crecto::Adapters::SQLite3
-    conf.database = "database.db"
+    conf.database = TBot::Config::DB_LOCATION
   end
 end
 
