@@ -1,0 +1,11 @@
+#! /usr/bin/env crystal
+
+require "sqlite3"
+require "micrate"
+require "totem"
+
+totem = Totem.from_file("./config.yaml")
+db_file = totem.get("database.file").as_s
+
+Micrate::DB.connection_url = "sqlite3://#{db_file}"
+Micrate::Cli.run

@@ -8,6 +8,10 @@ shards:
     github: crystal-lang/crystal-db
     version: 0.5.0
 
+  micrate:
+    github: amberframework/micrate
+    version: 0.3.3
+
   popcorn:
     github: icyleaf/popcorn
     version: 0.1.1
