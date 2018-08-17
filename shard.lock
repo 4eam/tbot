@@ -1,0 +1,26 @@
+version: 1.0
+shards:
+  crecto:
+    github: fridgerator/crecto
+    version: 0.9.0
+
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.5.0
+
+  popcorn:
+    github: icyleaf/popcorn
+    version: 0.1.1
+
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+    version: 0.10.0
+
+  telegram_bot:
+    github: hangyas/telegram_bot
+    commit: 1b2a8b437dfdf43ac4ee19d2b8cbfe4964c3e6e4
+
+  totem:
+    github: icyleaf/totem
+    version: 0.4.0
+
