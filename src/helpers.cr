@@ -29,6 +29,7 @@ module TBot
     
     def reply_and_kick(msg)
       reply msg, kick_msg(msg)
+      delete_message(msg.chat.id, msg.message_id)
       return if is_admin?(msg)
       kick_chat_member(msg.chat.id, msg.from.not_nil!.id)
       unban_chat_member(msg.chat.id, msg.from.not_nil!.id)
