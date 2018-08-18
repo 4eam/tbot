@@ -10,5 +10,5 @@ require "totem"
 require "./src/main"
 
 puts "Initialize"
-bot = TBot::Bot.new(TBot::Config::BOT_KEY)
+bot = TBot::Bot.new(TBot::Config::BOT_NAME, TBot::Config::BOT_KEY)
 bot.polling

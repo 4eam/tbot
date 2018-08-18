@@ -22,7 +22,7 @@ module TBot
       if !str.nil?
         words = Repo.all(Blacklist, Query.new.where(chat_id: chat_id))
         words.each do |bl|
-          return true if str.downcase.includes?(bl.word.not_nil!.downcase)
+          return true if str.gsub(" ", "").downcase.includes?(bl.word.not_nil!.downcase)
         end
       end
     end

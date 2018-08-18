@@ -9,8 +9,8 @@ module TBot
     include TBot::Lang
     include TBot::Helpers
   
-    def initialize(key)
-      super("TSKeeper", key)
+    def initialize(name, key)
+      super(name, key)
   
       cmd "help" do |msg|
         reply msg, help_msg
