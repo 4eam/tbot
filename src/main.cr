@@ -10,7 +10,7 @@ module TBot
     include TBot::Helpers
   
     def initialize(key)
-      super("TBot", key)
+      super("TSKeeper", key)
   
       cmd "help" do |msg|
         reply msg, help_msg
@@ -61,7 +61,7 @@ module TBot
 
     def handle(msg : TelegramBot::Message)
       if text = msg.text || msg.caption
-        if text.includes?("/")
+        if text[0] == '/'
           super
         elsif is_dangerous?(text, msg.chat.id)
           reply_and_kick(msg)

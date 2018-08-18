@@ -4,12 +4,12 @@ module TBot::Lang
  /help - помощь
  /words - увидеть список запр. слов
  Админ. функции:
- /add {word} - добавить слово в блеклист
- /del {word} - удалить его оттуда"
+ /add {word} - добавить слово в блэклист
+ /del {word} - удалить слово из блэклиста"
   end
 
   def debug_msg(message)
-    "DEBUG\n#{Time.now}\n#{message.chat.id}"
+    "DEBUG\n#{Time.now}\n#{message.to_pretty_json}"
   end
 
   def add_msg(params)
