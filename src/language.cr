@@ -12,20 +12,20 @@ module TBot::Lang
     "DEBUG\n#{Time.now}\n#{message.to_pretty_json}"
   end
 
-  def add_msg(params)
-    "Слово '#{params[0]}' добавлено в список."
+  def add_msg(word)
+    "Слово '#{word}' добавлено в список."
   end
 
-  def add_error_msg(params)
-    "Невозможно добавить '#{params[0]}'."
+  def add_error_msg(word)
+    "Невозможно добавить '#{word}'."
   end
 
-  def del_msg(params)
-    "Cлово '#{params[0]}' удалено из списка."
+  def del_msg(word)
+    "Cлово '#{word}' удалено из списка."
   end
 
-  def del_error_msg(params)
-    "Невозможно удалить '#{params[0]}'"
+  def del_error_msg(word)
+    "Невозможно удалить '#{word}'"
   end
 
   def words_msg(q)
