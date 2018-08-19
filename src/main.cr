@@ -25,18 +25,21 @@ module TBot
           reply msg, not_admin_msg(msg)
           next
         end
-        if by_msg_and_word(msg, params).empty?
-          bl = Blacklist.new
-          bl.chat_id = msg.chat.id.to_s
-          bl.word = params[0]
-          chset = Repo.insert(bl)
-  
-          if chset.errors.empty?
-            reply msg, add_msg(params)
-            next
+        params.each do |word|
+          if by_msg_and_word(msg, word).empty?
+            bl = Blacklist.new
+            bl.chat_id = msg.chat.id.to_s
+            bl.word = word.downcase
+            chset = Repo.insert(bl)
+            if chset.errors.empty?
+              reply msg, add_msg(word)
+            else
+              reply msg, add_error_msg(word)
+            end
+          else
+            reply msg, add_error_msg(word)
           end
         end
-        reply msg, add_error_msg(params)
       end
   
       cmd "del" do |msg, params|
@@ -44,13 +47,15 @@ module TBot
           reply msg, not_admin_msg(msg)
           next
         end
-        bl = by_msg_and_word(msg, params)
-        if bl.any?
-          Repo.delete(bl.first)
-          reply msg, del_msg(params)
-        else
-          reply msg, del_error_msg(params)
-        end 
+        params.each do |word|
+          bl = by_msg_and_word(msg, word)
+          if bl.any?
+            Repo.delete(bl.first)
+            reply msg, del_msg(word)
+          else
+            reply msg, del_error_msg(word)
+          end 
+        end
       end
 
       cmd "words" do |msg|

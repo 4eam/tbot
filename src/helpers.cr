@@ -9,8 +9,8 @@ module TBot
       end
     end
 
-    def by_msg_and_word(msg, params)
-      Repo.all(Blacklist, Query.new.where(chat_id: msg.chat.id, word: params[0]))
+    def by_msg_and_word(msg, word)
+      Repo.all(Blacklist, Query.new.where(chat_id: msg.chat.id, word: word.downcase))
     end
 
     def by_msg(msg)
@@ -20,12 +20,14 @@ module TBot
 
     def is_dangerous?(str, chat_id)
       if !str.nil?
+        str = str.gsub(" ", "").downcase
         words = Repo.all(Blacklist, Query.new.where(chat_id: chat_id))
         words.each do |bl|
-          return true if str.gsub(" ", "").downcase.includes?(bl.word.not_nil!.downcase)
+          return true if str.includes?(bl.word.not_nil!)
         end
       end
     end
+    
     
     def reply_and_kick(msg)
       reply msg, kick_msg(msg)
