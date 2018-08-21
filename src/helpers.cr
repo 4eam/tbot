@@ -1,11 +1,16 @@
 module TBot
   module Helpers
+    def check_admin(msg)
+      return true if is_admin?(msg)
+      reply msg, not_admin_msg(msg)
+      false
+    end
+
     def is_admin?(msg)
       msg.from.try do |user|
         admins_ids = get_chat_administrators(msg.chat.id).map {|admin| admin.user.id}
         return true if admins_ids.includes?(user.id)
       end
-      reply msg, not_admin_msg(msg)
       false
     end
 
@@ -62,8 +67,10 @@ module TBot
       reply msg, kick_msg(msg)
       delete_message(msg.chat.id, msg.message_id)
       return if is_admin?(msg)
-      kick_chat_member(msg.chat.id, msg.from.not_nil!.id)
-      unban_chat_member(msg.chat.id, msg.from.not_nil!.id)
+      msg.from.try do |user|
+        kick_chat_member(msg.chat.id, user.id)
+        unban_chat_member(msg.chat.id, user.id)
+      end
     end
   end
 end

@@ -28,7 +28,7 @@ module TBot
       end
 
       cmd "add" do |msg, params|
-        next unless is_admin?(msg)
+        next unless check_admin(msg)
 
         params.each do |word|
           list = Blacklist.by(
@@ -49,7 +49,7 @@ module TBot
       end
   
       cmd "del" do |msg, params|
-        next unless is_admin?(msg)
+        next unless check_admin(msg)
 
         params.each do |word|
           bl = Blacklist.by(chat_id: msg.chat.id, word: word)
