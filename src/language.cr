@@ -48,6 +48,6 @@ USERS (DB):
   end
 
   def users_msg(users)
-    users.map {|user| "#{user.username}: #{users.user_id}"}.join("\n")
+    users.map {|user| "#{user.username}: #{user.user_id}"}.join("\n")
   end
 end
