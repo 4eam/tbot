@@ -1,18 +1,16 @@
 module TBot
   module Helpers
     def is_admin?(msg)
-      if msg.from
+      msg.from.try do |user|
         admins_ids = get_chat_administrators(msg.chat.id).map {|admin| admin.user.id}
-        if admins_ids.includes?(msg.from.not_nil!.id)
-          reply msg, not_admin_msg(msg)
-          return true
-        end
+        return true if admins_ids.includes?(user.id)
       end
+      reply msg, not_admin_msg(msg)
       false
     end
 
     def is_dangerous?(str, chat_id)
-      if !str.nil?
+      str.try do |str|
         str = str.gsub(" ", "").downcase
         words = Repo.all(Blacklist, Query.new.where(chat_id: chat_id))
         words.each do |bl|

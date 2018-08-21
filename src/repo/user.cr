@@ -13,6 +13,10 @@ class User < Crecto::Model
     Repo.all(User, Query.where(**params))
   end
 
+  def self.count(**params)
+    Repo.aggregate(User, :count, :id, Query.where(**params))
+  end
+
   def self.create_from(user_id, chat_id, username)
     u = User.new
     u.user_id  = user_id

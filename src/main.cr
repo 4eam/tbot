@@ -17,17 +17,18 @@ module TBot
       end
 
       cmd "debug" do |msg|
-        next if is_admin?(msg)
+        next unless is_admin?(msg)
         reply msg, debug_msg(msg)
       end
 
       cmd "users" do |msg|
+        count = User.count(chat_id: msg.chat.id)
         users = User.by(chat_id: msg.chat.id)
         reply msg, users_msg(users)
       end
 
       cmd "add" do |msg, params|
-        next if is_admin?(msg)
+        next unless is_admin?(msg)
 
         params.each do |word|
           list = Blacklist.by(
@@ -48,7 +49,7 @@ module TBot
       end
   
       cmd "del" do |msg, params|
-        next if is_admin?(msg)
+        next unless is_admin?(msg)
 
         params.each do |word|
           bl = Blacklist.by(chat_id: msg.chat.id, word: word)
