@@ -22,7 +22,7 @@ shards:
 
   telegram_bot:
     github: hangyas/telegram_bot
-    commit: f9a5c0cf097329f36a5f0f852efd9767855f4c0f
+    commit: 722bab24876d13a661f513b09c4569916f7a81c1
 
   totem:
     github: icyleaf/totem
