@@ -21,16 +21,15 @@ module TBot
       end
 
       cmd "add" do |msg, params|
-        if !is_admin?(msg)
-          reply msg, not_admin_msg(msg)
-          next
-        end
+        next if is_admin?(msg)
+
         params.each do |word|
-          if by_msg_and_word(msg, word).empty?
-            bl = Blacklist.new
-            bl.chat_id = msg.chat.id.to_s
-            bl.word = word.downcase
-            chset = Repo.insert(bl)
+          list = Blacklist.by(
+            chat_id: msg.chat.id.to_s, 
+            word: word
+          )
+          if list.empty?
+            chset = Blacklist.create_by(msg.chat.id, word)
             if chset.errors.empty?
               reply msg, add_msg(word)
             else
@@ -43,14 +42,12 @@ module TBot
       end
   
       cmd "del" do |msg, params|
-        if !is_admin?(msg)
-          reply msg, not_admin_msg(msg)
-          next
-        end
+        next if is_admin?(msg)
+
         params.each do |word|
-          bl = by_msg_and_word(msg, word)
+          bl = Blacklist.by(chat_id: msg.chat.id, word: word)
           if bl.any?
-            Repo.delete(bl.first)
+            Blacklist.delete(bl.first)
             reply msg, del_msg(word)
           else
             reply msg, del_error_msg(word)
@@ -59,12 +56,17 @@ module TBot
       end
 
       cmd "words" do |msg|
-        words = by_msg(msg)
+        words = Blacklist.by(chat_id: msg.chat.id)
         reply msg, words_msg(words)
       end
     end
 
-    def handle(msg : TelegramBot::Message)
+    def handle(msg : TelegramBot::Message) # Main handler for messages
+      # Create user by message if not exists
+      # Create if just joined
+      # Delete if left from chat
+      user_handler(msg)
+
       if text = msg.text || msg.caption
         if text[0] == '/'
           super

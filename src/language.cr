@@ -9,7 +9,12 @@ module TBot::Lang
   end
 
   def debug_msg(message)
-    "DEBUG\n#{Time.now}\n#{message.to_pretty_json}"
+    "DEBUG
+#{Time.now}
+ADMINS:
+#{get_chat_administrators(message.chat.id).to_pretty_json}
+USERS (DB):
+#{Repo.all(User, Query.where(chat_id: message.chat.id))}"
   end
 
   def add_msg(word)

@@ -1,5 +1,6 @@
 module Repo
   extend Crecto::Repo
+  DB_LOGGER = Logger.new(STDOUT, level: Logger::DEBUG)
 
   config do |conf|
     conf.adapter = Crecto::Adapters::SQLite3
@@ -12,3 +13,4 @@ Query = Crecto::Repo::Query
 Multi = Crecto::Multi
 
 require "./blacklist"
+require "./user"
