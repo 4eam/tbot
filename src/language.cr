@@ -46,4 +46,8 @@ USERS (DB):
     from = msg.from.not_nil!
     "Пользователь '#{from.first_name} #{from.last_name}' @#{from.username} нарушил правила чата"
   end
+
+  def users_msg(users)
+    users.map {|user| "#{user.username}: #{users.user_id}"}.join("\n")
+  end
 end

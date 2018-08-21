@@ -9,6 +9,10 @@ class User < Crecto::Model
   validate_required [:user_id, :username, :chat_id]
   validate_length :username, min: 2
 
+  def self.by(**params)
+    Repo.all(User, Query.where(**params))
+  end
+
   def self.create_from(user_id, chat_id, username)
     u = User.new
     u.user_id  = user_id

@@ -17,7 +17,13 @@ module TBot
       end
 
       cmd "debug" do |msg|
+        next if is_admin?(msg)
         reply msg, debug_msg(msg)
+      end
+
+      cmd "users" do |msg|
+        users = User.by(chat_id: msg.chat.id)
+        reply msg, users_msg(users)
       end
 
       cmd "add" do |msg, params|
