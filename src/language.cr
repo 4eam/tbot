@@ -1,20 +1,21 @@
 module TBot::Lang
   def help_msg 
-    "Я создан для бана. 
- /help - помощь
- /words - увидеть список запр. слов
- Админ. функции:
- /add {word} - добавить слово в блэклист
- /del {word} - удалить слово из блэклиста"
+    ["Я создан для бана.",
+    " /help - помощь",
+    " /words - увидеть список запр. слов",
+    " /users - увидеть список пользователей",
+    "Админ. функции:",
+    " /add {word} - добавить слово в блэклист",
+    " /del {word} - удалить слово из блэклиста"].join("\n") 
   end
 
   def debug_msg(message)
-    "DEBUG
-#{Time.now}
-ADMINS:
-#{get_chat_administrators(message.chat.id).to_pretty_json}
-USERS (DB):
-#{Repo.all(User, Query.where(chat_id: message.chat.id))}"
+    ["DEBUG",
+    "#{Time.now}",
+    "ADMINS:",
+    "#{get_chat_administrators(message.chat.id).to_pretty_json}",
+    "USERS (DB):",
+    "#{Repo.all(User, Query.where(chat_id: message.chat.id))}"].join("\n")
   end
 
   def add_msg(word)
@@ -47,7 +48,8 @@ USERS (DB):
     "Пользователь '#{from.first_name} #{from.last_name}' @#{from.username} нарушил правила чата"
   end
 
-  def users_msg(users)
+  def users_msg(users, count)
+    "Count: #{count}\n" +
     users.map {|user| "#{user.username}: #{user.user_id}"}.join("\n")
   end
 end

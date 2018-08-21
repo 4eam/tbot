@@ -24,7 +24,7 @@ module TBot
       cmd "users" do |msg|
         count = User.count(chat_id: msg.chat.id)
         users = User.by(chat_id: msg.chat.id)
-        reply msg, users_msg(users)
+        reply msg, users_msg(users, count)
       end
 
       cmd "add" do |msg, params|
