@@ -57,6 +57,7 @@ module TBot
       end
     end
     
+    
     def reply_and_kick(msg)
       reply msg, kick_msg(msg)
       delete_message(msg.chat.id, msg.message_id)
