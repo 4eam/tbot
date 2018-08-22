@@ -48,7 +48,9 @@ module TBot
       msg.new_chat_members.try do |users|
         users.each do |user|
           user.username.try do |username|
-            User.create_from(user.id, msg.chat.id, username)
+            if !user_exists?(user.id, msg.chat.id.to_s) 
+              User.create_from(user.id, msg.chat.id, username)
+            end
           end
         end
       end
@@ -69,6 +71,9 @@ module TBot
       return if is_admin?(msg)
       msg.from.try do |user|
         kick_chat_member(msg.chat.id, user.id)
+        user.username.try do |username|
+          User.delete_by(user.id, msg.chat.id, username)
+        end
         unban_chat_member(msg.chat.id, user.id)
       end
     end

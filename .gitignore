@@ -3,3 +3,4 @@ dist/*
 lib/
 .neph/*
 config.yaml
+./tbot
