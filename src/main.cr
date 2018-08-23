@@ -17,12 +17,12 @@ module TBot
       end
 
       cmd "debug" do |msg|
-        next unless check_admin?(msg)
+        next unless check_admin(msg)
         reply msg, debug_msg(msg)
       end
 
       cmd "users" do |msg|
-        next unless check_admin?(msg)
+        next unless check_admin(msg)
         count = User.count(chat_id: msg.chat.id)
         users = User.by(chat_id: msg.chat.id)
         reply msg, users_msg(users, count)
