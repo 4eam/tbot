@@ -1,5 +1,4 @@
 require "./config"
-require "./repo/config"
 require "./language"
 require "./helpers"
 

@@ -4,3 +4,4 @@ lib/
 .neph/*
 config.yaml
 ./tbot
+bin/*
