@@ -1,4 +1,4 @@
-class User < Crecto::Model
+class TBot::User < Crecto::Model
   schema "users", primary_key: true do
     field :id, Int32, primary_key: true
     field :user_id, Int32

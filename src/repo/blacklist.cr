@@ -1,4 +1,4 @@
-class Blacklist < Crecto::Model
+class TBot::Blacklist < Crecto::Model
   schema "blacklists", primary_key: true do
     field :id, Int32, primary_key: true
     field :chat_id, String
