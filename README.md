@@ -1,10 +1,10 @@
 # TBot
-DevSilenceKeeper but written in Crystal
-This is awesome anti-spam Telegram bot.
-https://t.me/devsilencekeeper_bot
+This is awesome anti-spam Telegram bot.  
+Check it in action! [DevSilenceKeeper](https://t.me/devsilencekeeper_bot)
 
 ## Setup for production
-Maybe you want to use ready-to-go build. Download it in releases.
+Maybe you want to use ready-to-go build. Download it in releases.  
+If you want to build it yourself, then follow this steps:
 
 - Run `shards build --release --production` to install dependencies and build.  
 - Copy `.tbot.yml.example` to `.tbot.yml` and edit your Bot Key and name
