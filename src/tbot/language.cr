@@ -10,12 +10,7 @@ module TBot::Lang
   end
 
   def debug_msg(message)
-    ["DEBUG",
-    "#{Time.now}",
-    "ADMINS:",
-    "#{get_chat_administrators(message.chat.id).to_pretty_json}",
-    "USERS (DB):",
-    "#{Repo.all(User, Query.where(chat_id: message.chat.id))}"].join("\n")
+    message.to_pretty_json
   end
 
   def add_msg(word)
@@ -48,8 +43,7 @@ module TBot::Lang
     "Пользователь '#{from.first_name} #{from.last_name}' @#{from.username} нарушил правила чата"
   end
 
-  def users_msg(users, count)
-    "Count: #{count}\n" +
-    users.map {|user| "#{user.username}: #{user.user_id}"}.join("\n")
+  def users_msg(count)
+    "Количество пользователей в чате: #{count}"
   end
 end
