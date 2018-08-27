@@ -1,7 +1,7 @@
 main:
   command: |
-    rm -f release.zip
-    zip -r release.zip tbot/
+    rm -f TBot.zip
+    zip -r TBot TBot/
   dir:
     dist
   depends_on:
@@ -9,26 +9,26 @@ main:
 
 make_dirs:
   command: |
-    rm -rf tbot
-    mkdir tbot
-    mkdir tbot/db
+    rm -rf TBot
+    mkdir TBot
+    mkdir TBot/db
   dir: 
     dist
 
 build:
   command: |
-    crystal build --release --static tbot.cr
+    shards build --release --production --static
 
 create_db:
   command: |
-    rm db/database.db
+    rm db/tbot.db
     bin/micrate up
 
 move_files:
   command: |
-    mv tbot dist/tbot/
-    cp config.yaml.example dist/tbot/
-    cp db/database.db dist/tbot/db/
+    cp bin/DevSilenceKeeper dist/TBot/
+    cp .tbot.yml.example dist/TBot/
+    cp db/tbot.db dist/TBot/db/
   depends_on:
     - make_dirs
     - build
