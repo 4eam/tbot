@@ -2,5 +2,6 @@ db/*.db
 dist/*
 lib/
 .neph/*
-config.yaml
+.tbot.yml
 ./tbot
+bin/*

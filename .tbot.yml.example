@@ -2,4 +2,4 @@ bot_api_key: BOTAPIKEY
 bot_name: DevSilienceKeeper
 
 database:
-  file: db/database.db
+  file: db/tbot.db
