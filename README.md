@@ -1,8 +1,21 @@
-# CrystalSilenceKeeper
+# TBot
 DevSilenceKeeper but written in Crystal
+This is awesome anti-spam Telegram bot.
+https://t.me/devsilencekeeper_bot
 
-## Setup
-- Run `shards` to install dependencies.  
-- Copy `config.yml.example` to `config.yml` and edit your Bot Key
+## Setup for production
+Maybe you want to use ready-to-go build. Download it in releases.
+
+- Run `shards build --release --production` to install dependencies and build.  
+- Copy `.tbot.yml.example` to `.tbot.yml` and edit your Bot Key and name
 - `bin/micrate up` to setup sqlite3 database    
-- You are ready to run bot with `crystal tbot.cr`
+- You are ready to run bot with `bin/DevSilenceKeeper`
+
+## Setup for development
+If you want to contribute, then:
+
+- Install *Crystal* language with all required libraries
+- Run `shards` to install required dependencies
+- Copy `.tbot.yml.example` to `.tbot.yml` and edit it with your data
+- `bin/micrate up` to setup sqlite DB
+- You are ready to develop and contribute! Run bot with `crystal src/DevSilenceKeeper.cr`

@@ -5,11 +5,11 @@ authors:
    - Grigoriy Betsan <griggors@gmail.com>
 
 description: |
-  DevSilenceKeeper but written in powerful Crystal
+  TBot is telegram anti-spam bot.
 
 targets:
-  CrystalSilenceKeeper:
-    main: src/CrystalSilenceKeeper.cr
+  DevSilenceKeeper:
+    main: src/DevSilenceKeeper.cr
 
 dependencies:
   telegram_bot:
