@@ -1,5 +1,6 @@
-bot_api_key: BOTAPIKEY
+bot_api_key: Bot_token
 bot_name: DevSilienceKeeper
+report_chat: "chat_id"
 
 database:
   file: db/tbot.db
