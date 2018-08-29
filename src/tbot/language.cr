@@ -51,8 +51,13 @@ module TBot::Lang
     text = msg.text.not_nil!
     chat = msg.chat.not_nil!
     from = msg.from.not_nil!
-    "Сообщение об ошибке от польователя \"#{from.first_name} #{from.last_name}\" @#{from.username}\n
-    (Из чата \"#{chat.title}\" @#{chat.username})\n
-    #{text[10..-1]}"
+    ["Сообщение об ошибке от пользователя: \"#{from.first_name} #{from.last_name}\" @#{from.username}",
+      "(Из чата \"#{chat.title}\" @#{chat.username})",
+      "",
+      "#{text[10..-1]}"].join("\n")
+  end
+
+  def report_have_sent
+      "Сообщение отправлено разработчикам."
   end
 end

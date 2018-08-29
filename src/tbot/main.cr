@@ -69,6 +69,7 @@ module TBot
       cmd "bugreport" do |msg|
         next unless check_admin(msg)
         send_message(TBot::Config::REPORT_CHAT, report_msg(msg))
+        reply msg, report_have_sent
       end
     end
 
