@@ -1,11 +1,11 @@
 module TBot::Lang
-  def help_msg 
+  def help_msg
     ["Я создан для бана.",
     " /words - увидеть список запр. слов",
     "Админ. функции:",
     " /users - вывести количество пользователей",
     " /add {word} - добавить слово в блэклист",
-    " /del {word} - удалить слово из блэклиста"].join("\n") 
+    " /del {word} - удалить слово из блэклиста"].join("\n")
   end
 
   def debug_msg(message)
@@ -44,5 +44,12 @@ module TBot::Lang
 
   def users_msg(count)
     "Количество пользователей в чате: #{count}"
+  end
+
+  def report_msg(msg)
+    text = msg.text.not_nil!
+    "Сообщение об ошибке от польователя \"#{msg.from.not_nil!.first_name} #{msg.from.not_nil!.last_name}\" @#{msg.from.not_nil!.username}\n
+    (Из чата \"#{msg.chat.not_nil!.title}\" @#{msg.chat.not_nil!.username})\n
+    #{text[10..-1]}"
   end
 end

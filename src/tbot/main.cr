@@ -7,10 +7,10 @@ module TBot
     include TelegramBot::CmdHandler
     include TBot::Lang
     include TBot::Helpers
-  
+
     def initialize(name, key)
       super(name, key)
-  
+
       cmd "help" do |msg|
         reply msg, help_msg
       end
@@ -31,7 +31,7 @@ module TBot
 
         params.each do |word|
           list = Blacklist.by(
-            chat_id: msg.chat.id.to_s.downcase, 
+            chat_id: msg.chat.id.to_s.downcase,
             word: word
           )
           if list.empty?
@@ -46,7 +46,7 @@ module TBot
           end
         end
       end
-  
+
       cmd "del" do |msg, params|
         next unless check_admin(msg)
 
@@ -57,13 +57,17 @@ module TBot
             reply msg, del_msg(word)
           else
             reply msg, del_error_msg(word)
-          end 
+          end
         end
       end
 
       cmd "words" do |msg|
         words = Blacklist.by(chat_id: msg.chat.id)
         reply msg, words_msg(words)
+      end
+
+      cmd "bugreport" do |msg|
+        send_message(TBot::Config::REPORT_CHAT, report_msg(msg))
       end
     end
 
