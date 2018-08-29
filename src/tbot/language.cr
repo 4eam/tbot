@@ -5,7 +5,8 @@ module TBot::Lang
     "Админ. функции:",
     " /users - вывести количество пользователей",
     " /add {word} - добавить слово в блэклист",
-    " /del {word} - удалить слово из блэклиста"].join("\n")
+    " /del {word} - удалить слово из блэклиста",
+    " /bugreport {text} - сообщить разработчикам об ошибке"].join("\n")
   end
 
   def debug_msg(message)
@@ -34,7 +35,7 @@ module TBot::Lang
   end
 
   def not_admin_msg(msg)
-    "Функция недоступна, потому-что вы не админ"
+    "Функция недоступна, потому что вы не админ"
   end
 
   def kick_msg(msg)
@@ -48,8 +49,10 @@ module TBot::Lang
 
   def report_msg(msg)
     text = msg.text.not_nil!
-    "Сообщение об ошибке от польователя \"#{msg.from.not_nil!.first_name} #{msg.from.not_nil!.last_name}\" @#{msg.from.not_nil!.username}\n
-    (Из чата \"#{msg.chat.not_nil!.title}\" @#{msg.chat.not_nil!.username})\n
+    chat = msg.chat.not_nil!
+    from = msg.from.not_nil!
+    "Сообщение об ошибке от польователя \"#{from.first_name} #{from.last_name}\" @#{from.username}\n
+    (Из чата \"#{chat.title}\" @#{chat.username})\n
     #{text[10..-1]}"
   end
 end
