@@ -94,5 +94,9 @@ module TBot
         end
       end
     end
+
+    def handle_edited(msg)
+      # Empty method to override one provided by library and fix logging
+    end
   end
 end
