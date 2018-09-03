@@ -40,7 +40,7 @@ module TBot::Lang
 
   def kick_msg(msg)
     from = msg.from.not_nil!
-    "Пользователь '#{from.first_name} #{from.last_name}' @#{from.username} нарушил правила чата"
+    "Пользователь '#{from.first_name} #{from.last_name}' нарушил правила чата"
   end
 
   def users_msg(count)
