@@ -37,4 +37,9 @@ class TBot::User < Crecto::Model
       )
     )
   end
+
+  def self.get_chats
+    q = Query.distinct("users.chat_id")
+    Repo.all(User, q).map {|u| u.chat_id.try(&.to_i64) }
+  end
 end
