@@ -78,36 +78,11 @@ module TBot
       # Create if just joined
       # Delete if left from chat
       user_handler(msg)
-
-      if text = msg.text || msg.caption
-        if text[0] == '/'
-          super
-        elsif is_dangerous?(text, msg.chat.id)
-          reply_and_kick(msg)
-        elsif msg.entities
-          msg.entities.not_nil!.each do |entity|
-            if is_dangerous?(entity.url, msg.chat.id)
-              reply_and_kick(msg)
-              break
-            end
-          end
-        end
-      end
+      check_text(msg) { super }
     end
 
     def handle_edited(msg : TelegramBot::Message)
-      if text = msg.text || msg.caption
-        if is_dangerous?(text, msg.chat.id)
-          reply_and_kick(msg)
-        elsif msg.entities
-          msg.entities.not_nil!.each do |entity|
-            if is_dangerous?(entity.url, msg.chat.id)
-              reply_and_kick(msg)
-              break
-            end
-          end
-        end
-      end
+      check_text(msg) { }
     end
 
   end
