@@ -95,8 +95,20 @@ module TBot
       end
     end
 
-    def handle_edited(msg)
-      # Empty method to override one provided by library and fix logging
+    def handle_edited(msg : TelegramBot::Message)
+      if text = msg.text || msg.caption
+        if is_dangerous?(text, msg.chat.id)
+          reply_and_kick(msg)
+        elsif msg.entities
+          msg.entities.not_nil!.each do |entity|
+            if is_dangerous?(entity.url, msg.chat.id)
+              reply_and_kick(msg)
+              break
+            end
+          end
+        end
+      end
     end
+
   end
 end
