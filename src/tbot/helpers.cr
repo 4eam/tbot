@@ -33,11 +33,11 @@ module TBot
       left_user(msg)
       new_user_handler(msg)
     end
-    
+
     def new_user_handler(msg) # Create user if by posted message
       msg.from.try do |user|
         user.username.try do |username|
-          if !user_exists?(user.id, msg.chat.id.to_s) 
+          if !user_exists?(user.id, msg.chat.id.to_s)
             User.create_from(user.id, msg.chat.id, username)
           end
         end
@@ -48,7 +48,7 @@ module TBot
       msg.new_chat_members.try do |users|
         users.each do |user|
           user.username.try do |username|
-            if !user_exists?(user.id, msg.chat.id.to_s) 
+            if !user_exists?(user.id, msg.chat.id.to_s)
               User.create_from(user.id, msg.chat.id, username)
             end
           end
@@ -63,8 +63,8 @@ module TBot
         end
       end
     end
-    
-    
+
+
     def reply_and_kick(msg)
       reply msg, kick_msg(msg)
       delete_message(msg.chat.id, msg.message_id)
@@ -77,5 +77,23 @@ module TBot
         unban_chat_member(msg.chat.id, user.id)
       end
     end
+
+    def check_text(msg)
+      if text = msg.text || msg.caption
+        if text[0] == '/'
+          yield
+        elsif is_dangerous?(text, msg.chat.id)
+          reply_and_kick(msg)
+        elsif msg.entities
+          msg.entities.not_nil!.each do |entity|
+            if is_dangerous?(entity.url, msg.chat.id)
+              reply_and_kick(msg)
+              break
+            end
+          end
+        end
+      end
+    end
+    
   end
 end
